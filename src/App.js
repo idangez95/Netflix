@@ -22,7 +22,7 @@ class App extends Component {
 
   rentMovie = (movieId) => {
     const movies = [...this.state.moviesData]
-    let movie = movies.map(m => m).find(m => m.id === movieId)
+    let movie = movies.find(m => m.id === movieId)
     movie.isRented = true
     this.setState({ moviesData: movies })
   }
@@ -37,25 +37,34 @@ class App extends Component {
   render(){
     return (
       <Router>
-        <div className="App">
+      
+        <header>
+          <nav id="navbar">
+            <div className="container">
+              <h1> <span className="title">N</span>etflix </h1>
+              <ul>
+                <li><Link to="/">Home</Link></li>
+                <li><Link to="/catalog">Catalog</Link></li>
+              </ul>
+            </div>
+          </nav>
+        </header>
 
-          <div className="nav-bar">
-            <Link to="/">Home</Link><br></br>
-            <Link to="/catalog">Catalog</Link>
-          </div>
-
-          <div className="users">
-            <Route path="/" exact render={() => <Landing />}/>
-          </div>
+          <Route path="/" exact render={() => <Landing />}/>
           
-          <Route path="/catalog" exact render={({match}) => <Catalog match= {match} retriveMovie={this.retriveMovie} 
-                  rentMovie={this.rentMovie} movies={this.state.moviesData} />}/>
-          <Route path="/catalog/:userId" exact render={({match}) => <Catalog match= {match} retriveMovie={this.retriveMovie} 
-                  rentMovie={this.rentMovie} movies={this.state.moviesData} />}/>
-          <Route path="/movie/:movieId" exact render={({match}) => <MovieDetail match={match} movies={this.state.moviesData}/>}/>
-          <Route path="/catalog/:userId/movie/:movieId" exact render={({match}) => <MovieDetail match={match} movies={this.state.moviesData}/>}/>
+          <Route path="/catalog" exact
+            render={({match}) => <Catalog match= {match} retriveMovie={this.retriveMovie} 
+            rentMovie={this.rentMovie} movies={this.state.moviesData} />}/>
 
-          </div>
+          <Route path="/catalog/:userId" exact
+            render={({match}) => <Catalog match= {match} retriveMovie={this.retriveMovie} 
+            rentMovie={this.rentMovie} movies={this.state.moviesData} />}/>
+
+          <Route path="/movie/:movieId" exact
+           render={({match}) => <MovieDetail match={match} movies={this.state.moviesData}/>}/>
+
+          <Route path="/catalog/:userId/movie/:movieId" exact
+            render={({match}) => <MovieDetail match={match} movies={this.state.moviesData}/>}/>
       </Router>
       
     );
