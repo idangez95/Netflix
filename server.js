@@ -1,4 +1,3 @@
-const dotenv = require('dotenv')
 const express = require('express')
 const app = express()
 
@@ -9,7 +8,6 @@ app.use(function (req, res, next) {
     next()
 })
 
-dotenv.config({path: './config/config.env'})
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
