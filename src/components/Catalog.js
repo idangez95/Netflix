@@ -13,7 +13,7 @@ class Catalog extends Component {
     }
 
     typing = (event) => {
-        const value = event.target.value.toLowerCase();
+        const value = event.target.value;
         this.setState({
             input: value
         }, () => {
@@ -39,14 +39,14 @@ class Catalog extends Component {
 
     render() {
         const movies = this.props.movies
-
+        console.log(this.state.input)
+        console.log(this.state.relevantMovies)
         return (
 
             <div className="container-catalog">
                 <input className="search"
                     placeHolder="Search Your Movie!"
                     type="text"
-                    style={{ textTransform: "lowercase" }}
                     onChange={this.typing}
                 />
                 <div className="catalog">
